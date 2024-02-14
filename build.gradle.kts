@@ -4,4 +4,30 @@ plugins {
     id("org.jetbrains.kotlin.android") version "1.9.22" apply false
     id("com.google.devtools.ksp") version "1.9.0-1.0.13" apply false
     id("com.google.dagger.hilt.android") version "2.50" apply false
+    id("org.jlleitschuh.gradle.ktlint") version "12.1.0" apply false
+}
+
+allprojects {
+    tasks.register("copyGitHooks", Copy::class) {
+        description = "Copies the git hooks from /git-hooks to the .git folder."
+        group = "git hooks"
+        from("$rootDir/scripts/pre-commit")
+        into("$rootDir/.git/hooks/")
+    }
+
+    tasks.register("installGitHooks", Exec::class) {
+        description = "Installs the pre-commit git hooks from /git-hooks."
+        group = "git hooks"
+        workingDir = rootDir
+        commandLine("chmod", "-R", "+x", ".git/hooks/")
+        dependsOn("copyGitHooks")
+        doLast {
+            logger.info("Git hook installed successfully.")
+        }
+    }
+    afterEvaluate {
+        tasks.findByName("preBuild")?.let {
+            it.dependsOn("installGitHooks")
+        }
+    }
 }

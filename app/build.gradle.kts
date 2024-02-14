@@ -1,9 +1,12 @@
+import org.jlleitschuh.gradle.ktlint.reporter.ReporterType
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("kotlin-kapt")
     id("com.google.devtools.ksp")
     id("com.google.dagger.hilt.android")
+    id("org.jlleitschuh.gradle.ktlint")
 }
 
 android {
@@ -38,6 +41,35 @@ android {
     }
 }
 
+configure<org.jlleitschuh.gradle.ktlint.KtlintExtension> {
+    version.set("0.48.2")
+    debug.set(true)
+    verbose.set(true)
+    android.set(true)
+    outputToConsole.set(true)
+    outputColorName.set("RED")
+    ignoreFailures.set(true)
+    enableExperimentalRules.set(true)
+    additionalEditorconfig.set( // not supported until ktlint 0.49
+        mapOf(
+            "max_line_length" to "20",
+        ),
+    )
+    disabledRules.set(setOf("final-newline")) // not supported with ktlint 0.48+
+    baseline.set(file("ktlint-baseline.xml"))
+    reporters {
+        reporter(ReporterType.PLAIN)
+        reporter(ReporterType.CHECKSTYLE)
+    }
+    kotlinScriptAdditionalPaths {
+        include(fileTree("scripts/"))
+    }
+    filter {
+        exclude("**/generated/**")
+        include("**/kotlin/**")
+    }
+}
+
 dependencies {
 
     implementation("androidx.core:core-ktx:1.12.0")
@@ -66,5 +98,4 @@ dependencies {
     ksp("com.google.dagger:hilt-android-compiler:2.50")
     ksp("androidx.hilt:hilt-compiler:1.1.0")
     implementation("androidx.hilt:hilt-navigation-fragment:1.1.0")
-
 }

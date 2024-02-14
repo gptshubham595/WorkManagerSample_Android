@@ -3,9 +3,9 @@ package com.example.workmanagersample.presentation
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import androidx.work.Constraints
 import androidx.work.NetworkType
-import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.PeriodicWorkRequest
 import androidx.work.WorkManager
 import com.example.workmanagersample.R
@@ -24,6 +24,15 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setupWorker()
+        initObserver()
+    }
+
+    private fun initObserver() {
+        lifecycleScope.launchWhenStarted {
+            quoteViewModel.quoteList.collect {
+                println("Quote: $it")
+            }
+        }
     }
 
     private fun setupWorker() {
