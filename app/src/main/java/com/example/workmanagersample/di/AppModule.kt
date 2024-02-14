@@ -11,10 +11,10 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import javax.inject.Singleton
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -31,7 +31,7 @@ object AppModule {
             .client(okHttpClient)
             .build()
         return retrofit.create(
-            QuoteService::class.java,
+            QuoteService::class.java
         )
     }
 

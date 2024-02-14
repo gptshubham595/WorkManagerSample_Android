@@ -14,8 +14,8 @@ import com.example.workmanagersample.R
 import com.example.workmanagersample.presentation.viewModels.QuoteViewModel
 import com.example.workmanagersample.presentation.worker.QuoteWorker
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
 import java.util.concurrent.TimeUnit
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -34,8 +34,6 @@ class MainActivity : AppCompatActivity() {
         lifecycleScope.launch {
             quoteViewModel.quoteList.flowWithLifecycle(lifecycle, Lifecycle.State.STARTED).collect {
                 println("Quote: $it")
-
-
             }
         }
     }

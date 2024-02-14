@@ -14,7 +14,7 @@ import javax.inject.Inject
 class QuoteManagerRepoImpl @Inject constructor(
     private val quoteService: QuoteService,
     private val quoteDatabase: QuoteDatabase,
-    @ApplicationContext private val applicationContext: Context,
+    @ApplicationContext private val applicationContext: Context
 ) : QuoteManagerRepo {
 
     override suspend fun getQuotes(page: Int): QuoteListEntity? {

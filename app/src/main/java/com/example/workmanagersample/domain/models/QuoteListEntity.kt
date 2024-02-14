@@ -6,5 +6,5 @@ data class QuoteListEntity(
     val page: Int,
     val results: List<ResultEntity>,
     val totalCount: Int,
-    val totalPages: Int,
+    val totalPages: Int
 )

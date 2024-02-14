@@ -11,7 +11,7 @@ fun QuoteListData.toDomain() = QuoteListEntity(
     page = page,
     results = results.map { it.toDomain() },
     totalCount = totalCount,
-    totalPages = totalPages,
+    totalPages = totalPages
 )
 
 fun ResultData.toDomain() = ResultEntity(
@@ -22,5 +22,5 @@ fun ResultData.toDomain() = ResultEntity(
     content = content,
     dateAdded = dateAdded,
     dateModified = dateModified,
-    length = length,
+    length = length
 )

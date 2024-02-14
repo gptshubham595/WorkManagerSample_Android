@@ -22,7 +22,7 @@ abstract class QuoteDatabase : RoomDatabase() {
                     INSTANCE = Room.databaseBuilder(
                         context,
                         QuoteDatabase::class.java,
-                        "quoteDB",
+                        "quoteDB"
                     )
                         .build()
                 }

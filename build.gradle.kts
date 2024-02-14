@@ -16,6 +16,7 @@ allprojects {
     }
 
     tasks.register("installGitHooks", Exec::class) {
+        println("installGitHook")
         description = "Installs the pre-commit git hooks from /git-hooks."
         group = "git hooks"
         workingDir = rootDir

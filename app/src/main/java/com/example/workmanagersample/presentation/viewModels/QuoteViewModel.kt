@@ -5,14 +5,14 @@ import androidx.lifecycle.viewModelScope
 import com.example.workmanagersample.domain.models.ResultEntity
 import com.example.workmanagersample.domain.usecase.GetQuotesUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 @HiltViewModel
 class QuoteViewModel @Inject constructor(
-    private val getQuotesUseCase: GetQuotesUseCase,
+    private val getQuotesUseCase: GetQuotesUseCase
 ) : ViewModel() {
 
     private val _quoteList = MutableStateFlow<List<ResultEntity>?>(null)
@@ -29,6 +29,6 @@ class QuoteViewModel @Inject constructor(
         },
         onFailure = {
             // handle error
-        },
+        }
     )
 }

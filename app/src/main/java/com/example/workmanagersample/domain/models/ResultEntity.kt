@@ -13,5 +13,5 @@ data class ResultEntity(
     val content: String,
     val dateAdded: String,
     val dateModified: String,
-    val length: Int,
+    val length: Int
 )
