@@ -41,7 +41,7 @@ android {
     }
 }
 
-configure<org.jlleitschuh.gradle.ktlint.KtlintExtension> {
+ktlint {
     version.set("0.48.2")
     debug.set(true)
     verbose.set(true)
