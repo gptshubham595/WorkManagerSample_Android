@@ -3,6 +3,8 @@ package com.example.workmanagersample.presentation
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.work.Constraints
 import androidx.work.NetworkType
@@ -12,6 +14,7 @@ import com.example.workmanagersample.R
 import com.example.workmanagersample.presentation.viewModels.QuoteViewModel
 import com.example.workmanagersample.presentation.worker.QuoteWorker
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 import java.util.concurrent.TimeUnit
 
 @AndroidEntryPoint
@@ -28,9 +31,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initObserver() {
-        lifecycleScope.launchWhenStarted {
-            quoteViewModel.quoteList.collect {
+        lifecycleScope.launch {
+            quoteViewModel.quoteList.flowWithLifecycle(lifecycle, Lifecycle.State.STARTED).collect {
                 println("Quote: $it")
+
+
             }
         }
     }
