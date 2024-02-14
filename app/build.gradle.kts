@@ -28,7 +28,7 @@ android {
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro",
+                "proguard-rules.pro"
             )
         }
     }
@@ -52,8 +52,8 @@ ktlint {
     enableExperimentalRules.set(true)
     additionalEditorconfig.set( // not supported until ktlint 0.49
         mapOf(
-            "max_line_length" to "20",
-        ),
+            "max_line_length" to "20"
+        )
     )
     disabledRules.set(setOf("final-newline")) // not supported with ktlint 0.48+
     baseline.set(file("ktlint-baseline.xml"))

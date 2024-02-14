@@ -11,7 +11,7 @@ abstract class BaseUseCase<in Params, out Result> where Result : Any? {
         scope: CoroutineScope,
         params: Params,
         onSuccess: (Result) -> Unit,
-        onFailure: (Throwable) -> Unit,
+        onFailure: (Throwable) -> Unit
     ) {
         scope.launch {
             try {
