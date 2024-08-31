@@ -6,7 +6,6 @@ import com.example.workmanagersample.utils.BaseUseCase
 import javax.inject.Inject
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import javax.inject.Singleton
 
 class GetRandomQuotesBackgroundUseCase @Inject constructor(
     private val quoteManagerRepo: QuoteManagerRepo

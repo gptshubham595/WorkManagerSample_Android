@@ -3,7 +3,6 @@ package com.example.workmanagersample
 import android.app.Application
 import androidx.hilt.work.HiltWorkerFactory
 import androidx.work.Configuration
-import com.example.workmanagersample.data.api.QuoteService
 import dagger.hilt.android.HiltAndroidApp
 import javax.inject.Inject
 
