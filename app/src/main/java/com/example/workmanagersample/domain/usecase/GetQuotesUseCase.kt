@@ -7,10 +7,10 @@ import javax.inject.Inject
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
-class GetQuotesUseCase @Inject constructor(private val workManagerRepo: QuoteManagerRepo) :
+class GetQuotesUseCase @Inject constructor(private val quoteManagerRepo: QuoteManagerRepo) :
     BaseUseCase<Int, Flow<List<ResultEntity>>>() {
     override suspend fun run(params: Int): Flow<List<ResultEntity>> = flow {
-        workManagerRepo.getQuotes(params)?.let {
+        quoteManagerRepo.getQuotes(params)?.let {
             emit(it.results)
         }
     }

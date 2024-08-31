@@ -6,13 +6,14 @@ import com.example.workmanagersample.utils.BaseUseCase
 import javax.inject.Inject
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import javax.inject.Singleton
 
 class GetRandomQuotesBackgroundUseCase @Inject constructor(
-    private val workManagerRepo: QuoteManagerRepo
+    private val quoteManagerRepo: QuoteManagerRepo
 ) :
     BaseUseCase<Unit, Flow<List<ResultEntity>>>() {
     override suspend fun run(params: Unit): Flow<List<ResultEntity>> = flow {
-        workManagerRepo.getQuotesBackground()?.let {
+        quoteManagerRepo.getQuotesBackground()?.let {
             emit(it.results)
         }
     }

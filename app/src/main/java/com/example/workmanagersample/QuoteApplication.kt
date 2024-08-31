@@ -1,10 +1,18 @@
 package com.example.workmanagersample
 
 import android.app.Application
+import androidx.hilt.work.HiltWorkerFactory
+import androidx.work.Configuration
+import com.example.workmanagersample.data.api.QuoteService
 import dagger.hilt.android.HiltAndroidApp
+import javax.inject.Inject
 
 @HiltAndroidApp
-class QuoteApplication : Application() {
+class QuoteApplication() : Application(), Configuration.Provider {
+
+    @Inject
+    lateinit var workerFactory: HiltWorkerFactory
+
     override fun onCreate() {
         super.onCreate()
         initialize()
@@ -16,4 +24,9 @@ class QuoteApplication : Application() {
 //        val quoteRepository: QuoteManagerRepo =
 //            QuoteManagerRepoImpl(quoteService, dataBase, applicationContext)
     }
+
+    override val workManagerConfiguration: Configuration
+        get() = Configuration.Builder()
+            .setWorkerFactory(workerFactory)
+            .build()
 }
